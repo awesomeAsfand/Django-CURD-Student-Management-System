@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% include 'sms/navbar.html' %}
+{% block content %}
+<br>
+<form method="post" enctype="multipart/form-data" class="form-group">
+    <fieldset>
+        <legend align="center"> Add Student Information </legend>
+
+    <div class="form-group" align="center">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit" name="Submit" class="btn btn-primary">
+    <br>
+    </div>
+
+    </fieldset>
+</form>
+
+<table class= "table">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Education</th>
+        <th>Image</th>
+        <th>Delete</th>
+        <th>Update</th>
+        <th>Update Marks</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        {%for s in student_info%}
+        <td><a href="{% url 'details' s.id %}">{{s.name}}</a></td>
+        <td>{{s.age}}</td>
+        <td>{{s.education}}</td>
+        <td><img src="media/{{s.Image}}" width="100" height="100"></td>
+        <td><a href="{%url 'delete' s.id %}"><input type="submit" value="Delete" class="btn btn-warning"></a></td>
+         <td><a href="{%url 'update' s.id %}"><input type="submit" value="Update" class="btn btn-primary"></a></td>
+        <td><a href="{%url 'add_marks' s.id %}"><input type="submit" value="Add Marks" class="btn btn-primary"></a></td>
+    </tr>
+    {%endfor %}
+    </tbody>
+ </table>
+<br>
+
+
+</body>
+</html>
+{% endblock  %}

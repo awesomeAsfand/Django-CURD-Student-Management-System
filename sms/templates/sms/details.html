@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Detail</title>
+</head>
+<body>
+{% load static %}
+{% include 'sms/navbar.html' %}
+{% block content %}
+<div class="card">
+  <h5 class="card-header">Student Details</h5>
+  <div class="card-body">
+      Name: {{detail.name}}
+      <br>
+      Age : {{detail.age}}
+      <br>
+      Education : {{detail.education}}
+      <img src="{{detail.Image.url}}" width="100" height="100" align="right">
+  </div>
+</div>
+
+<div class="card">
+  <h5 class="card-header">Semester 1 Marks </h5>
+  <div class="card-body">
+      <table class="table">
+          <thead>
+          <tr>
+              <th>Math</th>
+              <th>English</th>
+              <th>DBMS</th>
+              <th>Total</th>
+          </tr>
+          </thead>
+          <tbody>
+          {% for m in detail.marks.all %}
+          <tr>
+              <td> {{m.math}} </td>
+              <td> {{m.english}} </td>
+              <td> {{m.dbms}} </td>
+              <td></td>
+          </tr>
+           {% endfor %}
+          </tbody>
+
+      </table>
+
+  </div>
+</div>
+
+
+
+</body>
+</html>
+{% endblock %}
